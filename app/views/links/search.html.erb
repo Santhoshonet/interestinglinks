@@ -1,0 +1,49 @@
+<!--- body -->
+<div>
+    <h1>Interesting links</h1>
+    <div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
+<div>
+  <div class="search-container" >
+    <input type="text" id='txtsearchcriteria' name="pattern" class="search-field" />
+    <a href="#" class="small blue gradient-button searchbutton">Search</a>
+  </div>
+  <div id="div-tablebody">
+    <table class="data" id="tbllistoflinks" >
+      <head>
+        <tr>
+          <th class="left tablecolumn" tooltip='Intersting link'>Link</th>
+          <th class="right tablecolumn" tooltip='Intersting link'></th>
+        </tr>
+      </head>
+      <tbody>
+      <% unless @result.nil? %>
+        <% if @result.count() > 0 -%>
+          <% @result.each do |res| -%>
+              <% unless res.nil? %>
+                  <tr class="linkrow">
+                    <td colspan="2" ><div><a href='<%= res[:link] -%>' target="_blank" ><%= res[:link] -%></a></div>
+                    </td>
+                  </tr>
+              <% end %>
+          <% end -%>
+        <% else -%>
+          <tr class="emptyRow linkrow">
+            <td colspan="2">There is no links found for your search criteria.</td>
+          </tr>
+        <% end -%>
+      <% else %>
+          <tr class="emptyRow linkrow">
+            <td colspan="2">There is no links found for your search criteria.</td>
+          </tr>
+      <% end  %>
+       <tr id="noresultsrow">
+        <td colspan="2">There is no links found for your search criteria.</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="clearfix"></div>
+

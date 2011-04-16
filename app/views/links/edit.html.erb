@@ -1,0 +1,28 @@
+<h1>Editing link</h1>
+
+<% form_for(@link) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :link %><br />
+    <%= f.text_field :link %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :tag %><br />
+    <%= f.text_field :tag %>
+  </p>
+  <p>
+    <%= f.label :createdby %><br />
+    <%= f.text_field :createdby %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @link %> |
+<%= link_to 'Back', links_path %>

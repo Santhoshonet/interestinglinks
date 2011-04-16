@@ -1,0 +1,16 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  # testing with the null value [name field]
+  name: ""
+  description: MyText
+
+two:
+  # testing with the real value
+  name: "my sample tag"
+  description: MyText
+
+three:
+  # for testing repeated value
+  name: "my sample tag"
+  description: "some description"
+

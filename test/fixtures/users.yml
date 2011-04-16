@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  # for validating presence of username
+  name: ""
+  email: "someone@google.com"
+
+two:
+  # for validating the presence of email
+  name: "some username"
+  email: ""
+
+three:
+  # validating with the acual value
+  name: "someuser"
+  email: "someone@google.com"
+
+four:
+ # validating the repeated values
+ name: "someuser"
+ email: "anothermail@google.com"
+
+five:
+  # validating the repeated value
+ name: "someotheruser"
+ email: someone@google.com"
+

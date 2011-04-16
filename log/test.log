@@ -1,0 +1,1571 @@
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (266.0ms)[0m   [0mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [4;36;1mSQL (302.0ms)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (223.0ms)[0m   [0mCREATE TABLE "links" ("id" serial primary key, "link" character varying(255), "description" text, "tag" integer, "createdby" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (183.0ms)[0m   [0;1mCREATE TABLE "notificationlinks" ("id" serial primary key, "link" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;35;1mSQL (292.0ms)[0m   [0mCREATE TABLE "tags" ("id" serial primary key, "name" character varying(255), "description" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (323.0ms)[0m   [0;1mCREATE TABLE "users" ("id" serial primary key, "username" character varying(255), "email" character varying(255), "crypted_password" character varying(255), "password_salt" character varying(255), "persistence_token" character varying(255), "isnotificationsubscribed" boolean, "created_at" timestamp, "updated_at" timestamp, "identity_url" character varying(255)) [0m
+  [4;35;1mSQL (3.0ms)[0m   [0mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [4;36;1mSQL (91.0ms)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20110205075434')[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20101206050151')[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20101206050317')[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'General') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('General', 'default tag', '2011-02-08 06:05:35.754644', '2011-02-08 06:05:35.754644') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'General') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.noteslate.com/') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.noteslate.com/', 'Interesting note taking tablet', 1, NULL, '2011-02-08 06:05:35.792646', '2011-02-08 06:05:35.792646') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'General') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.mpug.com/News/Pages/Ask-the-Experts-Configuring-the-Project-Server-2010-Enterprise-Global-Template.aspx') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.mpug.com/News/Pages/Ask-the-Experts-Configuring-the-Project-Server-2010-Enterprise-Global-Template.aspx', 'Configuring the Project Server 2010 Enterprise Global Template', 1, NULL, '2011-02-08 06:05:35.800647', '2011-02-08 06:05:35.800647') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Project Server 2010') [0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'Project Server 2010') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('Project Server 2010', 'import from existing system', '2011-02-08 06:05:35.804647', '2011-02-08 06:05:35.804647') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://msdnrss.thecoderblogs.com/2011/02/project-server-2010-take-care-changing-custom-fields-to-allow-multiple-values/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://msdnrss.thecoderblogs.com/2011/02/project-server-2010-take-care-changing-custom-fields-to-allow-multiple-values/', 'Take care changing custom fields to allow multiple values', 2, NULL, '2011-02-08 06:05:35.806647', '2011-02-08 06:05:35.806647') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'MS Office') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'MS Office') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('MS Office', 'import from existing system', '2011-02-08 06:05:35.810647', '2011-02-08 06:05:35.810647') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.educationonlineforcomputers.com/blogs/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.educationonlineforcomputers.com/blogs/', 'Office 2010 References, Videos, and Guides', 3, NULL, '2011-02-08 06:05:35.814648', '2011-02-08 06:05:35.814648') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Visual Sudio 2010') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'Visual Sudio 2010') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('Visual Sudio 2010', 'import from existing system', '2011-02-08 06:05:35.817648', '2011-02-08 06:05:35.817648') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://sqlserverselect.blogspot.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://sqlserverselect.blogspot.com/', 'Visual Studio 2010 Database Object', 4, NULL, '2011-02-08 06:05:35.819648', '2011-02-08 06:05:35.819648') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'MS Office') [0m
+  [4;35;1mSQL (1.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://office-2010.iyogi.net/') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://office-2010.iyogi.net/', 'iYogi', 3, NULL, '2011-02-08 06:05:35.823648', '2011-02-08 06:05:35.823648') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Project Professional 2010') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'Project Professional 2010') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('Project Professional 2010', 'import from existing system', '2011-02-08 06:05:35.827648', '2011-02-08 06:05:35.827648') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.applepark.co.uk/displaying-the-day-count-for-a-task/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.applepark.co.uk/displaying-the-day-count-for-a-task/', 'Displaying the Day count for a task', 5, NULL, '2011-02-08 06:05:35.830649', '2011-02-08 06:05:35.830649') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Project Server 2010') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://epmsource.com/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://epmsource.com/', 'Invoke Project Status reporting, direct from the ribbon', 2, NULL, '2011-02-08 06:05:35.833649', '2011-02-08 06:05:35.833649') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'Design') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('Design', 'import from existing system', '2011-02-08 06:05:35.837649', '2011-02-08 06:05:35.837649') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://uxmovement.com/resources/8-resources-for-beautiful-interface-design-examples') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://uxmovement.com/resources/8-resources-for-beautiful-interface-design-examples', 'UX Design inspiration', 6, NULL, '2011-02-08 06:05:35.840649', '2011-02-08 06:05:35.840649') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Project Server 2010') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://blogs.catapultsystems.com/epm/archive/2010/08/06/accessing-project-server-from-the-iphone.aspx') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://blogs.catapultsystems.com/epm/archive/2010/08/06/accessing-project-server-from-the-iphone.aspx', 'Accessing Project Server from the iPhone', 2, NULL, '2011-02-08 06:05:35.843649', '2011-02-08 06:05:35.843649') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Project Server 2010') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://social.technet.microsoft.com/Forums/en-US/projectserver2010general/thread/b7f1116e-733a-48b5-9f20-251d3f14d5a8') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://social.technet.microsoft.com/Forums/en-US/projectserver2010general/thread/b7f1116e-733a-48b5-9f20-251d3f14d5a8', 'Company calendar in Project Server 2010', 2, NULL, '2011-02-08 06:05:35.847650', '2011-02-08 06:05:35.847650') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'JQuery') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('JQuery', 'import from existing system', '2011-02-08 06:05:35.850650', '2011-02-08 06:05:35.850650') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://aquantum-demo.appspot.com/file-upload') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://aquantum-demo.appspot.com/file-upload', 'JQuery file upload add-in that allows multi part uploads', 7, NULL, '2011-02-08 06:05:35.852650', '2011-02-08 06:05:35.852650') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'Development') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('Development', 'import from existing system', '2011-02-08 06:05:35.856650', '2011-02-08 06:05:35.856650') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://txt2re.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://txt2re.com/', 'RegEx generator', 8, NULL, '2011-02-08 06:05:35.859650', '2011-02-08 06:05:35.859650') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Project Server 2010') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://msdn.microsoft.com/en-us/library/gg508876.aspx') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://msdn.microsoft.com/en-us/library/gg508876.aspx', 'Project Server Cache Synchronization', 2, NULL, '2011-02-08 06:05:35.862650', '2011-02-08 06:05:35.862650') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Project Server 2010') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://msdn.microsoft.com/en-us/library/gg446880.aspx') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://msdn.microsoft.com/en-us/library/gg446880.aspx', 'Using the ProjTool Test Application in Project Server 2010', 2, NULL, '2011-02-08 06:05:35.867651', '2011-02-08 06:05:35.867651') RETURNING "id"[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Project Server 2010') [0m
+  [4;35;1mSQL (1.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://msdn.microsoft.com/en-us/library/gg549101.aspx') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://msdn.microsoft.com/en-us/library/gg549101.aspx', 'How to: Modify the Ribbon in PWA', 2, NULL, '2011-02-08 06:05:35.871651', '2011-02-08 06:05:35.871651') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'General') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://tcpmonitor.altervista.org/tcpeye-network-monitoring/#') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://tcpmonitor.altervista.org/tcpeye-network-monitoring/#', NULL, 1, NULL, '2011-02-08 06:05:35.874651', '2011-02-08 06:05:35.874651') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Cool') [0m
+  [4;35;1mSQL (1.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'Cool') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('Cool', 'import from existing system', '2011-02-08 06:05:35.878651', '2011-02-08 06:05:35.878651') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.yankodesign.com/2011/01/19/how-cool-can-a-flip-phone-get/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.yankodesign.com/2011/01/19/how-cool-can-a-flip-phone-get/', NULL, 9, NULL, '2011-02-08 06:05:35.880651', '2011-02-08 06:05:35.880651') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Misc') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'Misc') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('Misc', 'import from existing system', '2011-02-08 06:05:35.883652', '2011-02-08 06:05:35.883652') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'https://www.pivotaltracker.com') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('https://www.pivotaltracker.com', 'Agile Project Management tool', 10, NULL, '2011-02-08 06:05:35.886652', '2011-02-08 06:05:35.886652') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'https://chartbeat.com/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('https://chartbeat.com/', 'Real time site monitoring', 6, NULL, '2011-02-08 06:05:35.889652', '2011-02-08 06:05:35.889652') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://apigee.com/') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://apigee.com/', 'API traffic management', 8, NULL, '2011-02-08 06:05:35.916654', '2011-02-08 06:05:35.916654') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'RoR Applications') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'RoR Applications') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('RoR Applications', 'import from existing system', '2011-02-08 06:05:35.919654', '2011-02-08 06:05:35.919654') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.appcelerator.com/products/titanium-cross-platform-application-development/') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.appcelerator.com/products/titanium-cross-platform-application-development/', 'Mobile application development using JS and RoR', 11, NULL, '2011-02-08 06:05:35.922654', '2011-02-08 06:05:35.922654') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'RoR Applications') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://railsinstaller.org/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://railsinstaller.org/', 'Quick Installer for RoR on Windows', 11, NULL, '2011-02-08 06:05:35.927654', '2011-02-08 06:05:35.927654') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'General') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.demoduck.com') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.demoduck.com', 'Demo screen cast creator', 1, NULL, '2011-02-08 06:05:35.930654', '2011-02-08 06:05:35.930654') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'General') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.labnol.org/internet/101-useful-websites/18078/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.labnol.org/internet/101-useful-websites/18078/', 'interesting links', 1, NULL, '2011-02-08 06:05:35.934655', '2011-02-08 06:05:35.934655') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Project Server') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'Project Server') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('Project Server', 'import from existing system', '2011-02-08 06:05:35.937655', '2011-02-08 06:05:35.937655') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://technet.microsoft.com/en-us/projectserver/gg176680.aspx') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://technet.microsoft.com/en-us/projectserver/gg176680.aspx', 'Project Server related information including CUs, Service Packs etc', 12, NULL, '2011-02-08 06:05:35.940655', '2011-02-08 06:05:35.940655') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://richworks.in/2010/10/17-most-common-myths-in-the-design-world/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://richworks.in/2010/10/17-most-common-myths-in-the-design-world/', NULL, 6, NULL, '2011-02-08 06:05:35.944655', '2011-02-08 06:05:35.944655') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.tripwiremagazine.com/tools/html/45-really-essential-free-html-form-enhancements.html') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.tripwiremagazine.com/tools/html/45-really-essential-free-html-form-enhancements.html', 'This link gives a list of tutorials that how enhancements can be made to a form. This link mostly shows how to enhance a form using Javascript and Javascript frameworks', 7, NULL, '2011-02-08 06:05:35.947655', '2011-02-08 06:05:35.947655') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.tutoriallounge.com/2009/09/25-paramount-jquery-tutorials/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.tutoriallounge.com/2009/09/25-paramount-jquery-tutorials/', NULL, 7, NULL, '2011-02-08 06:05:35.950655', '2011-02-08 06:05:35.950655') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://net.tutsplus.com/tutorials/html-css-techniques/20-html-forms-best-practices-for-beginners/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://net.tutsplus.com/tutorials/html-css-techniques/20-html-forms-best-practices-for-beginners/', 'This article contains some good practices to follow when creating a HTML Form', 6, NULL, '2011-02-08 06:05:35.954656', '2011-02-08 06:05:35.954656') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'when the region is focused on') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'when the region is focused on') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('when the region is focused on', 'import from existing system', '2011-02-08 06:05:35.957656', '2011-02-08 06:05:35.957656') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.keyframesandcode.com/code/development/javascript/jquery-highlight-plugin/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.keyframesandcode.com/code/development/javascript/jquery-highlight-plugin/', 'This plugin higlights a region', 13, NULL, '2011-02-08 06:05:35.961656', '2011-02-08 06:05:35.961656') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.jankoatwarpspeed.com/post/2008/07/09/Justify-elements-using-jQuery-and-CSS.aspx') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.jankoatwarpspeed.com/post/2008/07/09/Justify-elements-using-jQuery-and-CSS.aspx', NULL, 7, NULL, '2011-02-08 06:05:35.964656', '2011-02-08 06:05:35.964656') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.dfc-e.com/metiers/multimedia/opensource/jqtransform/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.dfc-e.com/metiers/multimedia/opensource/jqtransform/', NULL, 7, NULL, '2011-02-08 06:05:35.968656', '2011-02-08 06:05:35.968656') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.jankoatwarpspeed.com/post/2009/09/28/webform-wizard-jquery.aspx') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.jankoatwarpspeed.com/post/2009/09/28/webform-wizard-jquery.aspx', 'An interesting plugin that changes a web form to a wizard driven form', 7, NULL, '2011-02-08 06:05:35.972657', '2011-02-08 06:05:35.972657') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://labs.ideeinc.com/multicolr') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://labs.ideeinc.com/multicolr', NULL, 6, NULL, '2011-02-08 06:05:35.975657', '2011-02-08 06:05:35.975657') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'SharePoint') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'SharePoint') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('SharePoint', 'import from existing system', '2011-02-08 06:05:35.979657', '2011-02-08 06:05:35.979657') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://sheltonblog.com/archive/2007/11/21/how-to-video-building-a-basic-approval-workflow-with-sharepoint.aspx') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://sheltonblog.com/archive/2007/11/21/how-to-video-building-a-basic-approval-workflow-with-sharepoint.aspx', 'Approval Workflow How To Visual tutorials', 14, NULL, '2011-02-08 06:05:35.982657', '2011-02-08 06:05:35.982657') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Project Server') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://blogs.msdn.com/chrisfie/archive/2007/04/05/configuring-project-server-2007-using-the-command-line-stsadm.aspx') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://blogs.msdn.com/chrisfie/archive/2007/04/05/configuring-project-server-2007-using-the-command-line-stsadm.aspx', 'Script to create new SSP and a Project server instance', 12, NULL, '2011-02-08 06:05:35.985657', '2011-02-08 06:05:35.985657') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Project Server') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://blogs.technet.com/doug_mccutcheon/archive/2009/10/12/microsoft-project-server-and-portfolio-server-2007-training-available-on-demand.aspx') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://blogs.technet.com/doug_mccutcheon/archive/2009/10/12/microsoft-project-server-and-portfolio-server-2007-training-available-on-demand.aspx', 'Availability of recordings from the popular EPM University 2007 courses', 12, NULL, '2011-02-08 06:05:35.988658', '2011-02-08 06:05:35.988658') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'SharePoint') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.andrewconnell.com/blog/archive/2009/10/19/part-1-improvements-to-the-core-sharepoint-platform.aspx') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.andrewconnell.com/blog/archive/2009/10/19/part-1-improvements-to-the-core-sharepoint-platform.aspx', 'Lists the improvements that are coming in SharePoint 2010', 14, NULL, '2011-02-08 06:05:35.992658', '2011-02-08 06:05:35.992658') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'SharePoint') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.andrewconnell.com/blog/archive/2009/10/19/part-2-whats-improved-with-sharepoint-server-2010-web.aspx') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.andrewconnell.com/blog/archive/2009/10/19/part-2-whats-improved-with-sharepoint-server-2010-web.aspx', NULL, 14, NULL, '2011-02-08 06:05:35.995658', '2011-02-08 06:05:35.995658') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.andrewconnell.com/blog/archive/2009/10/19/part-3-whats-new-with-sharepoint-server-2010-web.aspx') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.andrewconnell.com/blog/archive/2009/10/19/part-3-whats-new-with-sharepoint-server-2010-web.aspx', NULL, 7, NULL, '2011-02-08 06:05:35.998658', '2011-02-08 06:05:35.998658') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Project Server') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://blogs.msdn.com/chrisfie/archive/2009/10/30/sharepoint-and-project-server-uls-viewer-tool-released.aspx') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://blogs.msdn.com/chrisfie/archive/2009/10/30/sharepoint-and-project-server-uls-viewer-tool-released.aspx', NULL, 12, NULL, '2011-02-08 06:05:36.002658', '2011-02-08 06:05:36.002658') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'but how about creating a resource and as USER in project server using PSI') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'but how about creating a resource and as USER in project server using PSI') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('but how about creating a resource and as USER in project server using PSI', 'import from existing system', '2011-02-08 06:05:36.005659', '2011-02-08 06:05:36.005659') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://projectserverblogs.com/?p=204') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://projectserverblogs.com/?p=204', 'Create resource is stright forward', 15, NULL, '2011-02-08 06:05:36.008659', '2011-02-08 06:05:36.008659') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.jankoatwarpspeed.com/post/2009/11/01/usability-tips-visualizing-ajax-requests.aspx') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.jankoatwarpspeed.com/post/2009/11/01/usability-tips-visualizing-ajax-requests.aspx', NULL, 7, NULL, '2011-02-08 06:05:36.011659', '2011-02-08 06:05:36.011659') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Project Server') [0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://windowsitpro.com/article/articleid/102920/q-i-have-users-in-another-forest-who-i-want-to-have-exchange-mailboxes-in-my-exchange-organization-what-are-my-options.html') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://windowsitpro.com/article/articleid/102920/q-i-have-users-in-another-forest-who-i-want-to-have-exchange-mailboxes-in-my-exchange-organization-what-are-my-options.html', 'Read users from another AD Forest and use them as resource in project server', 12, NULL, '2011-02-08 06:05:36.015659', '2011-02-08 06:05:36.015659') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Project Server') [0m
+  [4;35;1mSQL (1.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.projectserverhelp.com/Lists/Posts/Post.aspx?ID=107') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.projectserverhelp.com/Lists/Posts/Post.aspx?ID=107', 'Monitor Your Project Server Investment by Measuring Project Web Access Traffic and Usage', 12, NULL, '2011-02-08 06:05:36.019659', '2011-02-08 06:05:36.019659') RETURNING "id"[0m
+  [4;36;1mSQL (3.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://davidwalsh.name/css-page-breaks') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://davidwalsh.name/css-page-breaks', NULL, 6, NULL, '2011-02-08 06:05:36.025660', '2011-02-08 06:05:36.025660') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.nicholasbarger.com/52-Developing_ASPNET_Custom_Controls') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.nicholasbarger.com/52-Developing_ASPNET_Custom_Controls', 'this link explains the process of creating our own controls', 6, NULL, '2011-02-08 06:05:36.028660', '2011-02-08 06:05:36.028660') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.dzinepress.com/2009/11/55-decisive-useful-jquery-tutorials/') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.dzinepress.com/2009/11/55-decisive-useful-jquery-tutorials/', NULL, 7, NULL, '2011-02-08 06:05:36.031660', '2011-02-08 06:05:36.031660') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'RSS Feed') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'RSS Feed') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('RSS Feed', 'import from existing system', '2011-02-08 06:05:36.034660', '2011-02-08 06:05:36.034660') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://rss.softwaregarden.com/aboutrss.html') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://rss.softwaregarden.com/aboutrss.html', 'Basics of RSS', 16, NULL, '2011-02-08 06:05:36.037660', '2011-02-08 06:05:36.037660') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'SharePoint') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://mosshowto.blogspot.com/2009/04/application-pages-breadcrumb.html') LIMIT 1[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://mosshowto.blogspot.com/2009/04/application-pages-breadcrumb.html', 'Programatically Breadcrumb', 14, NULL, '2011-02-08 06:05:36.041661', '2011-02-08 06:05:36.041661') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.p51labs.com/simply-buttons-v2/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.p51labs.com/simply-buttons-v2/', NULL, 6, NULL, '2011-02-08 06:05:36.045661', '2011-02-08 06:05:36.045661') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'SharePoint') [0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://ktskumar.wordpress.com/2009/03/10/sharepoint-databases/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://ktskumar.wordpress.com/2009/03/10/sharepoint-databases/', 'MOSS Databases', 14, NULL, '2011-02-08 06:05:36.049661', '2011-02-08 06:05:36.049661') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Project Server') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://earnedvalue.codeplex.com/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://earnedvalue.codeplex.com/', NULL, 12, NULL, '2011-02-08 06:05:36.052661', '2011-02-08 06:05:36.052661') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://pixelmatrixdesign.com/weblog/comments/announcing_uniform/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://pixelmatrixdesign.com/weblog/comments/announcing_uniform/', NULL, 7, NULL, '2011-02-08 06:05:36.055661', '2011-02-08 06:05:36.055661') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.jankoatwarpspeed.com/post/2009/11/17/Forgiveness-UI-design.aspx') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.jankoatwarpspeed.com/post/2009/11/17/Forgiveness-UI-design.aspx', NULL, 6, NULL, '2011-02-08 06:05:36.060662', '2011-02-08 06:05:36.060662') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://dzineblog.com/2009/11/18-impressive-web-form-validation-scripts-to-enhance-user-experience.html') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://dzineblog.com/2009/11/18-impressive-web-form-validation-scripts-to-enhance-user-experience.html', NULL, 7, NULL, '2011-02-08 06:05:36.064662', '2011-02-08 06:05:36.064662') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (1.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://code.google.com/closure/') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://code.google.com/closure/', NULL, 8, NULL, '2011-02-08 06:05:36.068662', '2011-02-08 06:05:36.068662') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://developer.yahoo.com/yui/profiler/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://developer.yahoo.com/yui/profiler/', NULL, 8, NULL, '2011-02-08 06:05:36.072662', '2011-02-08 06:05:36.072662') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://developer.yahoo.com/yui/yuitest/') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://developer.yahoo.com/yui/yuitest/', NULL, 8, NULL, '2011-02-08 06:05:36.075663', '2011-02-08 06:05:36.075663') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.bloggingdeveloper.com/post/Closure-Compiler-vs-YUI-Compressor-Comparing-the-Javascript-Compression-Tools.aspx') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.bloggingdeveloper.com/post/Closure-Compiler-vs-YUI-Compressor-Comparing-the-Javascript-Compression-Tools.aspx', NULL, 8, NULL, '2011-02-08 06:05:36.078663', '2011-02-08 06:05:36.078663') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://chrysbader.com/') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://chrysbader.com/', 'Good Practices for Web Design', 6, NULL, '2011-02-08 06:05:36.083663', '2011-02-08 06:05:36.083663') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.flickr.com/photos/jasonrobb/4009482842/sizes/o/in/pool-1070674@N20/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.flickr.com/photos/jasonrobb/4009482842/sizes/o/in/pool-1070674@N20/', NULL, 6, NULL, '2011-02-08 06:05:36.086663', '2011-02-08 06:05:36.086663') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://webdesignledger.com/resources/12-useful-jquery-plugins-for-working-with-tables') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://webdesignledger.com/resources/12-useful-jquery-plugins-for-working-with-tables', NULL, 7, NULL, '2011-02-08 06:05:36.089663', '2011-02-08 06:05:36.089663') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://inlinestyler.torchboxapps.com/') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://inlinestyler.torchboxapps.com/', 'Converts a external CSS styles to inline styles', 6, NULL, '2011-02-08 06:05:36.093664', '2011-02-08 06:05:36.093664') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'SharePoint') [0m
+  [4;35;1mSQL (1.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.simple-talk.com/dotnet/.net-tools/customizing-the-login-page-in-sharepoint-2007/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.simple-talk.com/dotnet/.net-tools/customizing-the-login-page-in-sharepoint-2007/', NULL, 14, NULL, '2011-02-08 06:05:36.097664', '2011-02-08 06:05:36.097664') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.pelagodesign.com/sidecar/emogrifier/') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.pelagodesign.com/sidecar/emogrifier/', NULL, 7, NULL, '2011-02-08 06:05:36.101664', '2011-02-08 06:05:36.101664') RETURNING "id"[0m
+  [4;35;1mSQL (18.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://blogs.msdn.com/mattdotson/archive/2006/03/02/542613.aspx') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://blogs.msdn.com/mattdotson/archive/2006/03/02/542613.aspx', 'To have static header in scrolling gridview', 8, NULL, '2011-02-08 06:05:36.123665', '2011-02-08 06:05:36.123665') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.smashingmagazine.com/2009/04/08/from-table-hell-to-div-hell/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.smashingmagazine.com/2009/04/08/from-table-hell-to-div-hell/', 'What is difficult in Table? Why Use Div''s', 6, NULL, '2011-02-08 06:05:36.128666', '2011-02-08 06:05:36.128666') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://css-tricks.com/html-invoice/') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://css-tricks.com/html-invoice/', NULL, 6, NULL, '2011-02-08 06:05:36.131666', '2011-02-08 06:05:36.131666') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://css-tricks.com/scrollfollow-sidebar/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://css-tricks.com/scrollfollow-sidebar/', 'Maybe useful for an option on a web page that has to be continuously available', 7, NULL, '2011-02-08 06:05:36.135666', '2011-02-08 06:05:36.135666') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://gwt-ext.com/demo/') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://gwt-ext.com/demo/', NULL, 6, NULL, '2011-02-08 06:05:36.138666', '2011-02-08 06:05:36.138666') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Project Server') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://msdn.microsoft.com/en-us/library/ee862408.aspx') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://msdn.microsoft.com/en-us/library/ee862408.aspx', NULL, 12, NULL, '2011-02-08 06:05:36.141666', '2011-02-08 06:05:36.141666') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'SharePoint') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://stackoverflow.com/questions/505651/windows-sharepoint-services-wss-and-forms-authentication-passing-those-creden') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://stackoverflow.com/questions/505651/windows-sharepoint-services-wss-and-forms-authentication-passing-those-creden', NULL, 14, NULL, '2011-02-08 06:05:36.145667', '2011-02-08 06:05:36.145667') RETURNING "id"[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://subsonicproject.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://subsonicproject.com/', 'Opensource for Data Layer', 8, NULL, '2011-02-08 06:05:36.149667', '2011-02-08 06:05:36.149667') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (1.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.noupe.com/design/data-tables-in-modern-web-design.html') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.noupe.com/design/data-tables-in-modern-web-design.html', NULL, 6, NULL, '2011-02-08 06:05:36.152667', '2011-02-08 06:05:36.152667') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://xaviershay.github.com/tufte-graph/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://xaviershay.github.com/tufte-graph/', NULL, 7, NULL, '2011-02-08 06:05:36.155667', '2011-02-08 06:05:36.155667') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://css-tricks.com/improved-current-field-highlighting-in-forms/') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://css-tricks.com/improved-current-field-highlighting-in-forms/', NULL, 7, NULL, '2011-02-08 06:05:36.159667', '2011-02-08 06:05:36.159667') RETURNING "id"[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://devsnippets.com/article/styling-your-lists.html') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://devsnippets.com/article/styling-your-lists.html', NULL, 6, NULL, '2011-02-08 06:05:36.164668', '2011-02-08 06:05:36.164668') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.cssstickyfooter.com/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.cssstickyfooter.com/', NULL, 6, NULL, '2011-02-08 06:05:36.167668', '2011-02-08 06:05:36.167668') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'https://browserlab.adobe.com/index.html#') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('https://browserlab.adobe.com/index.html#', NULL, 6, NULL, '2011-02-08 06:05:36.170668', '2011-02-08 06:05:36.170668') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://nettuts.s3.cdn.plus.org/443_editing/demo/code.html#') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://nettuts.s3.cdn.plus.org/443_editing/demo/code.html#', NULL, 7, NULL, '2011-02-08 06:05:36.173668', '2011-02-08 06:05:36.173668') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://davidwalsh.name/dw-content/load-more.php') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://davidwalsh.name/dw-content/load-more.php', NULL, 7, NULL, '2011-02-08 06:05:36.177668', '2011-02-08 06:05:36.177668') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (1.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://papermashup.com/jquery-ajax-delete/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://papermashup.com/jquery-ajax-delete/', NULL, 7, NULL, '2011-02-08 06:05:36.204670', '2011-02-08 06:05:36.204670') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://primercss.com/index.php') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://primercss.com/index.php', NULL, 6, NULL, '2011-02-08 06:05:36.208670', '2011-02-08 06:05:36.208670') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://iconizer.net/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://iconizer.net/', NULL, 7, NULL, '2011-02-08 06:05:36.213670', '2011-02-08 06:05:36.213670') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://symphony-cms.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://symphony-cms.com/', 'Content Management System', 8, NULL, '2011-02-08 06:05:36.216671', '2011-02-08 06:05:36.216671') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.mayzes.org/googlemaps.jquery.html') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.mayzes.org/googlemaps.jquery.html', 'Google Map using JQuery', 7, NULL, '2011-02-08 06:05:36.219671', '2011-02-08 06:05:36.219671') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Project Server') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://blogs.msdn.com/project/archive/2010/01/06/project-2010-business-intelligence-overview.aspx') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://blogs.msdn.com/project/archive/2010/01/06/project-2010-business-intelligence-overview.aspx', NULL, 12, NULL, '2011-02-08 06:05:36.222671', '2011-02-08 06:05:36.222671') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://technet.microsoft.com/en-us/sharepoint/ee692578.aspx') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://technet.microsoft.com/en-us/sharepoint/ee692578.aspx', NULL, 7, NULL, '2011-02-08 06:05:36.226671', '2011-02-08 06:05:36.226671') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'SharePoint') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.microsoft.com/downloads/details.aspx?displaylang=en&FamilyID=fc97d587-ffa4-4b43-b77d-958f3f8a87b9') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.microsoft.com/downloads/details.aspx?displaylang=en&FamilyID=fc97d587-ffa4-4b43-b77d-958f3f8a87b9', NULL, 14, NULL, '2011-02-08 06:05:36.229671', '2011-02-08 06:05:36.229671') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.maxdesign.com.au/presentation/checklist.htm') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.maxdesign.com.au/presentation/checklist.htm', NULL, 6, NULL, '2011-02-08 06:05:36.232672', '2011-02-08 06:05:36.232672') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://tutsvalley.com/tutorials/making-a-cool-spotlight-effect-with-jquery/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://tutsvalley.com/tutorials/making-a-cool-spotlight-effect-with-jquery/', NULL, 7, NULL, '2011-02-08 06:05:36.236672', '2011-02-08 06:05:36.236672') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://webstandard.kulando.de/post/2010/01/08/jquery-plugins-tutorials-sliding-fading-scrolling-zooming') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://webstandard.kulando.de/post/2010/01/08/jquery-plugins-tutorials-sliding-fading-scrolling-zooming', NULL, 7, NULL, '2011-02-08 06:05:36.239672', '2011-02-08 06:05:36.239672') RETURNING "id"[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.ajaxim.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.ajaxim.com/', NULL, 7, NULL, '2011-02-08 06:05:36.243672', '2011-02-08 06:05:36.243672') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://masugadesign.com/the-lab/scripts/unobtrusive-ajax-star-rating-bar/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://masugadesign.com/the-lab/scripts/unobtrusive-ajax-star-rating-bar/', NULL, 7, NULL, '2011-02-08 06:05:36.246672', '2011-02-08 06:05:36.246672') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://tutorialzine.com/2010/01/advanced-event-timeline-with-php-css-jquery/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://tutorialzine.com/2010/01/advanced-event-timeline-with-php-css-jquery/', NULL, 7, NULL, '2011-02-08 06:05:36.249673', '2011-02-08 06:05:36.249673') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://stackoverflow.com/questions/95600/jquery-error-option-in-ajax-utility') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://stackoverflow.com/questions/95600/jquery-error-option-in-ajax-utility', 'Ajax TimeOut/Error Handling tips', 7, NULL, '2011-02-08 06:05:36.252673', '2011-02-08 06:05:36.252673') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.dreamcss.com/2009/04/10-beautiful-sliding-panel-with-jquery.html') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.dreamcss.com/2009/04/10-beautiful-sliding-panel-with-jquery.html', NULL, 7, NULL, '2011-02-08 06:05:36.255673', '2011-02-08 06:05:36.255673') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.webappers.com/2010/01/12/how-to-create-facebook-style-footer-admin-panel/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+Webappers+%28WebAppers%29') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.webappers.com/2010/01/12/how-to-create-facebook-style-footer-admin-panel/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+Webappers+%28WebAppers%29', NULL, 7, NULL, '2011-02-08 06:05:36.258673', '2011-02-08 06:05:36.258673') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.webdeveloperjuice.com/2010/01/14/14-jquery-and-css-demos-i-wish-i-knew-much-before/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.webdeveloperjuice.com/2010/01/14/14-jquery-and-css-demos-i-wish-i-knew-much-before/', NULL, 7, NULL, '2011-02-08 06:05:36.262673', '2011-02-08 06:05:36.262673') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.net-kit.com/10-ways-to-animate-your-links/') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.net-kit.com/10-ways-to-animate-your-links/', NULL, 7, NULL, '2011-02-08 06:05:36.265673', '2011-02-08 06:05:36.265673') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.programmableweb.com/apis/directory/1?sort=category') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.programmableweb.com/apis/directory/1?sort=category', NULL, 8, NULL, '2011-02-08 06:05:36.268674', '2011-02-08 06:05:36.268674') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.mnot.net/cache_docs/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.mnot.net/cache_docs/', NULL, 8, NULL, '2011-02-08 06:05:36.271674', '2011-02-08 06:05:36.271674') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://blog.krisvandermast.com/BookReviewASPNET35ContentManagementSystemDevelopment.aspx') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://blog.krisvandermast.com/BookReviewASPNET35ContentManagementSystemDevelopment.aspx', NULL, 8, NULL, '2011-02-08 06:05:36.275674', '2011-02-08 06:05:36.275674') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.addebook.com/it/uncategorized/aspnet-35-cms-development_14338.html') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.addebook.com/it/uncategorized/aspnet-35-cms-development_14338.html', NULL, 8, NULL, '2011-02-08 06:05:36.278674', '2011-02-08 06:05:36.278674') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.codeproject.com/KB/aspnet/ProcessAttache.aspx') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.codeproject.com/KB/aspnet/ProcessAttache.aspx', NULL, 8, NULL, '2011-02-08 06:05:36.281674', '2011-02-08 06:05:36.281674') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.codeproject.com/KB/aspnet/ExploringIIS.aspx') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.codeproject.com/KB/aspnet/ExploringIIS.aspx', NULL, 8, NULL, '2011-02-08 06:05:36.285675', '2011-02-08 06:05:36.285675') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.markercss.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.markercss.com/', NULL, 6, NULL, '2011-02-08 06:05:36.288675', '2011-02-08 06:05:36.288675') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://thecodemine.org/') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://thecodemine.org/', NULL, 7, NULL, '2011-02-08 06:05:36.291675', '2011-02-08 06:05:36.291675') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.teambox.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.teambox.com/', NULL, 8, NULL, '2011-02-08 06:05:36.294675', '2011-02-08 06:05:36.294675') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.w3avenue.com/2010/02/03/guidelines-tools-and-resources-for-web-wireframing/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+w3avenue+%28W3Avenue%29&utm_content=Google+Reader') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.w3avenue.com/2010/02/03/guidelines-tools-and-resources-for-web-wireframing/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+w3avenue+%28W3Avenue%29&utm_content=Google+Reader', NULL, 6, NULL, '2011-02-08 06:05:36.298675', '2011-02-08 06:05:36.298675') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://codefusionlab.blogspot.com/2010/02/43-in-browser-web-development-tools.html') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://codefusionlab.blogspot.com/2010/02/43-in-browser-web-development-tools.html', NULL, 8, NULL, '2011-02-08 06:05:36.301676', '2011-02-08 06:05:36.301676') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.webresourcesdepot.com/e-mail-to-sms-providers-list-easiest-way-to-sms-enable-web-applications/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+webresourcesdepot+%28WebResourcesDepot%29') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.webresourcesdepot.com/e-mail-to-sms-providers-list-easiest-way-to-sms-enable-web-applications/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+webresourcesdepot+%28WebResourcesDepot%29', NULL, 8, NULL, '2011-02-08 06:05:36.304676', '2011-02-08 06:05:36.304676') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://encosia.com/2009/05/20/automatically-minify-and-combine-javascript-in-visual-studio/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://encosia.com/2009/05/20/automatically-minify-and-combine-javascript-in-visual-studio/', NULL, 8, NULL, '2011-02-08 06:05:36.308676', '2011-02-08 06:05:36.308676') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://alexgorbatchev.com/wiki/SyntaxHighlighter') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://alexgorbatchev.com/wiki/SyntaxHighlighter', NULL, 8, NULL, '2011-02-08 06:05:36.311676', '2011-02-08 06:05:36.311676') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://sixrevisions.com/user-interface/best-practices-for-hints-and-validation-in-web-forms/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://sixrevisions.com/user-interface/best-practices-for-hints-and-validation-in-web-forms/', NULL, 6, NULL, '2011-02-08 06:05:36.314676', '2011-02-08 06:05:36.314676') RETURNING "id"[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://zootool.com/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://zootool.com/', NULL, 6, NULL, '2011-02-08 06:05:36.319677', '2011-02-08 06:05:36.319677') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://live.visitmix.com/videos') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://live.visitmix.com/videos', NULL, 8, NULL, '2011-02-08 06:05:36.322677', '2011-02-08 06:05:36.322677') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://skyje.com/2010/03/drawing-tools/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://skyje.com/2010/03/drawing-tools/', NULL, 6, NULL, '2011-02-08 06:05:36.325677', '2011-02-08 06:05:36.325677') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.webdeveloperjuice.com/2010/03/20/17-attractive-web-apps-and-tools-you-simply-cannot-miss/') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.webdeveloperjuice.com/2010/03/20/17-attractive-web-apps-and-tools-you-simply-cannot-miss/', NULL, 6, NULL, '2011-02-08 06:05:36.329677', '2011-02-08 06:05:36.329677') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://ixedit.com/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://ixedit.com/', 'Browser tool to add interactivity a web page with no need to know any JQuery or javascript. Might be useful for non-developers', 7, NULL, '2011-02-08 06:05:36.332677', '2011-02-08 06:05:36.332677') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'a nice tool') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'a nice tool') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('a nice tool', 'import from existing system', '2011-02-08 06:05:36.335677', '2011-02-08 06:05:36.335677') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://aspnet.codeplex.com/releases/view/40584#DownloadId=106494') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://aspnet.codeplex.com/releases/view/40584#DownloadId=106494', 'Minifier for JS and CSS', 17, NULL, '2011-02-08 06:05:36.338678', '2011-02-08 06:05:36.338678') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://aext.net/2010/04/excellent-jquery-plugins-resources-for-data-presentation-and-grid-layout/') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://aext.net/2010/04/excellent-jquery-plugins-resources-for-data-presentation-and-grid-layout/', NULL, 7, NULL, '2011-02-08 06:05:36.341678', '2011-02-08 06:05:36.341678') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.exceptionhub.com/') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.exceptionhub.com/', 'Can we user this?', 8, NULL, '2011-02-08 06:05:36.344678', '2011-02-08 06:05:36.344678') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'SharePoint') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'https://www.idera.com/Content/Home.aspx') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('https://www.idera.com/Content/Home.aspx', NULL, 14, NULL, '2011-02-08 06:05:36.347678', '2011-02-08 06:05:36.347678') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://stephenwalther.com/blog/archive/2010/04/08/jquery-asp.net-and-browser-history.aspx?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+StephenWalther+%28Stephen+Walther+on+ASP.NET+MVC%29') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://stephenwalther.com/blog/archive/2010/04/08/jquery-asp.net-and-browser-history.aspx?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+StephenWalther+%28Stephen+Walther+on+ASP.NET+MVC%29', NULL, 7, NULL, '2011-02-08 06:05:36.350678', '2011-02-08 06:05:36.350678') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.scottlogic.co.uk/blog/gergely/2010/04/ten-cool-things-you-didnt-know-about-visual-studio-2010/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.scottlogic.co.uk/blog/gergely/2010/04/ten-cool-things-you-didnt-know-about-visual-studio-2010/', NULL, 8, NULL, '2011-02-08 06:05:36.353678', '2011-02-08 06:05:36.353678') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.mono-project.com/Main_Page') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.mono-project.com/Main_Page', NULL, 8, NULL, '2011-02-08 06:05:36.357679', '2011-02-08 06:05:36.357679') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://monotouch.net/DownloadTrial') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://monotouch.net/DownloadTrial', NULL, 8, NULL, '2011-02-08 06:05:36.360679', '2011-02-08 06:05:36.360679') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://msdn.microsoft.com/en-gb/magazine/ee336135.aspx') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://msdn.microsoft.com/en-gb/magazine/ee336135.aspx', NULL, 8, NULL, '2011-02-08 06:05:36.363679', '2011-02-08 06:05:36.363679') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://stackoverflow.com/questions/1619914/launch-browser-from-c-and-fill-in-username-and-password') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://stackoverflow.com/questions/1619914/launch-browser-from-c-and-fill-in-username-and-password', NULL, 8, NULL, '2011-02-08 06:05:36.366679', '2011-02-08 06:05:36.366679') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://js-kit.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://js-kit.com/', NULL, 7, NULL, '2011-02-08 06:05:36.370679', '2011-02-08 06:05:36.370679') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://sixrevisions.com/tools/chrome-extensions-developers-designers/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://sixrevisions.com/tools/chrome-extensions-developers-designers/', NULL, 6, NULL, '2011-02-08 06:05:36.373680', '2011-02-08 06:05:36.373680') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.browserscope.org/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.browserscope.org/', NULL, 6, NULL, '2011-02-08 06:05:36.377680', '2011-02-08 06:05:36.377680') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://dhtmlx.com/docs/products/dhtmlxGantt/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://dhtmlx.com/docs/products/dhtmlxGantt/', NULL, 7, NULL, '2011-02-08 06:05:36.380680', '2011-02-08 06:05:36.380680') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.visitmix.com/labs/incarnate/') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.visitmix.com/labs/incarnate/', NULL, 7, NULL, '2011-02-08 06:05:36.383680', '2011-02-08 06:05:36.383680') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://httpwatch.com/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://httpwatch.com/', NULL, 6, NULL, '2011-02-08 06:05:36.386680', '2011-02-08 06:05:36.386680') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.conceptfeedback.com/') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.conceptfeedback.com/', NULL, 6, NULL, '2011-02-08 06:05:36.390681', '2011-02-08 06:05:36.390681') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.rejetto.com/hfs/?f=intro') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.rejetto.com/hfs/?f=intro', NULL, 8, NULL, '2011-02-08 06:05:36.393681', '2011-02-08 06:05:36.393681') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.gist.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.gist.com/', NULL, 6, NULL, '2011-02-08 06:05:36.396681', '2011-02-08 06:05:36.396681') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.codethinked.com/post/2010/05/26/SquishIt-The-Friendly-ASPNET-JavaScript-and-CSS-Squisher.aspx') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.codethinked.com/post/2010/05/26/SquishIt-The-Friendly-ASPNET-JavaScript-and-CSS-Squisher.aspx', NULL, 8, NULL, '2011-02-08 06:05:36.399681', '2011-02-08 06:05:36.399681') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://tympanus.net/codrops/2010/05/24/collective-ajax-rating-system-create-simple-ajax-rating-system-using-jquery-ajax-and-php/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://tympanus.net/codrops/2010/05/24/collective-ajax-rating-system-create-simple-ajax-rating-system-using-jquery-ajax-and-php/', NULL, 7, NULL, '2011-02-08 06:05:36.403681', '2011-02-08 06:05:36.403681') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://teamdistinction.com/labs/dot-net-report-printing-library/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://teamdistinction.com/labs/dot-net-report-printing-library/', NULL, 8, NULL, '2011-02-08 06:05:36.406682', '2011-02-08 06:05:36.406682') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://alexfletcher.typepad.com/all_bets_off/2006/08/enabling_busine.html') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://alexfletcher.typepad.com/all_bets_off/2006/08/enabling_busine.html', NULL, 8, NULL, '2011-02-08 06:05:36.409682', '2011-02-08 06:05:36.409682') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://postageapp.com/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://postageapp.com/', NULL, 8, NULL, '2011-02-08 06:05:36.412682', '2011-02-08 06:05:36.412682') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://buckwilson.me/lightboxme/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://buckwilson.me/lightboxme/', NULL, 7, NULL, '2011-02-08 06:05:36.415682', '2011-02-08 06:05:36.415682') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://naveensrinivasan.com/2010/05/31/debugging-net-framework-4-0-without-source-code-using-windbg/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+naveensrinivasan%2FrUMM+%28Naveen+Blog%29') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://naveensrinivasan.com/2010/05/31/debugging-net-framework-4-0-without-source-code-using-windbg/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+naveensrinivasan%2FrUMM+%28Naveen+Blog%29', NULL, 8, NULL, '2011-02-08 06:05:36.419682', '2011-02-08 06:05:36.419682') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://michaelcrump.net/archive/2010/05/25/tools-and-utilities-for-the-.net-developer.aspx') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://michaelcrump.net/archive/2010/05/25/tools-and-utilities-for-the-.net-developer.aspx', NULL, 8, NULL, '2011-02-08 06:05:36.422682', '2011-02-08 06:05:36.422682') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.zurb.com/playground/jquery-text-change-custom-event') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.zurb.com/playground/jquery-text-change-custom-event', NULL, 7, NULL, '2011-02-08 06:05:36.425683', '2011-02-08 06:05:36.425683') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.sitepoint.com/dustmeselectors/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.sitepoint.com/dustmeselectors/', 'Useful tool to find CSS classes that have not been used on a page. Good for cleaning up CSS', 6, NULL, '2011-02-08 06:05:36.429683', '2011-02-08 06:05:36.429683') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'SharePoint') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.sharepointkings.com/2010/06/creating-custom-field-in-sharepoint.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+SharepointKings+%28Sharepoint+Kings%29&utm_content=Google+Reader') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.sharepointkings.com/2010/06/creating-custom-field-in-sharepoint.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+SharepointKings+%28Sharepoint+Kings%29&utm_content=Google+Reader', NULL, 14, NULL, '2011-02-08 06:05:36.457684', '2011-02-08 06:05:36.457684') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.clicktale.com/') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.clicktale.com/', NULL, 6, NULL, '2011-02-08 06:05:36.461685', '2011-02-08 06:05:36.461685') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://github.com/cloudhead/less.js') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://github.com/cloudhead/less.js', NULL, 7, NULL, '2011-02-08 06:05:36.464685', '2011-02-08 06:05:36.464685') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.bounceapp.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.bounceapp.com/', NULL, 6, NULL, '2011-02-08 06:05:36.468685', '2011-02-08 06:05:36.468685') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (1.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.codecapers.com/post/Error-Handling-in-MVC-with-ELMAH.aspx') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.codecapers.com/post/Error-Handling-in-MVC-with-ELMAH.aspx', 'MVC Error Log Plugin', 8, NULL, '2011-02-08 06:05:36.471685', '2011-02-08 06:05:36.471685') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://tortoisehg.bitbucket.org/') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://tortoisehg.bitbucket.org/', 'Source Control System', 8, NULL, '2011-02-08 06:05:36.474685', '2011-02-08 06:05:36.474685') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://horizonguy.wordpress.com/2010/06/11/asp-net-mvc-cms-thoughts-reviews-projects/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://horizonguy.wordpress.com/2010/06/11/asp-net-mvc-cms-thoughts-reviews-projects/', 'List of CMS applications', 8, NULL, '2011-02-08 06:05:36.477686', '2011-02-08 06:05:36.477686') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.planetgeek.ch/2010/06/20/how-to-select-open-source-libraries/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.planetgeek.ch/2010/06/20/how-to-select-open-source-libraries/', NULL, 8, NULL, '2011-02-08 06:05:36.480686', '2011-02-08 06:05:36.480686') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://instantblueprint.com/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://instantblueprint.com/', NULL, 6, NULL, '2011-02-08 06:05:36.484686', '2011-02-08 06:05:36.484686') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://i.seemikecode.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://i.seemikecode.com/', 'This might be a good tool to check a person we are interviewing. We can get them to type in code during a phone interview', 8, NULL, '2011-02-08 06:05:36.487686', '2011-02-08 06:05:36.487686') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (1.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://gskinner.com/RegExr/') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://gskinner.com/RegExr/', NULL, 8, NULL, '2011-02-08 06:05:36.491686', '2011-02-08 06:05:36.491686') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.gethifi.com/tools/regex') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.gethifi.com/tools/regex', NULL, 7, NULL, '2011-02-08 06:05:36.494687', '2011-02-08 06:05:36.494687') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Testing') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'Testing') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('Testing', 'import from existing system', '2011-02-08 06:05:36.498687', '2011-02-08 06:05:36.498687') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://loadimpact.com/index.php') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://loadimpact.com/index.php', NULL, 18, NULL, '2011-02-08 06:05:36.501687', '2011-02-08 06:05:36.501687') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Testing') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.adduse.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.adduse.com/', NULL, 18, NULL, '2011-02-08 06:05:36.505687', '2011-02-08 06:05:36.505687') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Testing') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://visualwebsiteoptimizer.com/') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://visualwebsiteoptimizer.com/', NULL, 18, NULL, '2011-02-08 06:05:36.510687', '2011-02-08 06:05:36.510687') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'System Admin') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'System Admin') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('System Admin', 'import from existing system', '2011-02-08 06:05:36.514688', '2011-02-08 06:05:36.514688') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://ninite.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://ninite.com/', NULL, 19, NULL, '2011-02-08 06:05:36.517688', '2011-02-08 06:05:36.517688') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://codeeval.com/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://codeeval.com/', NULL, 7, NULL, '2011-02-08 06:05:36.520688', '2011-02-08 06:05:36.520688') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.1stwebdesigner.com/resources/online-tools-website-validation-testing/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+1stwebdesigner+%281stwebdesigner%29&utm_content=Google+Reader') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.1stwebdesigner.com/resources/online-tools-website-validation-testing/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+1stwebdesigner+%281stwebdesigner%29&utm_content=Google+Reader', NULL, 6, NULL, '2011-02-08 06:05:36.523688', '2011-02-08 06:05:36.523688') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://browsershots.org/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://browsershots.org/', NULL, 6, NULL, '2011-02-08 06:05:36.527688', '2011-02-08 06:05:36.527688') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'HR') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'HR') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('HR', 'import from existing system', '2011-02-08 06:05:36.530689', '2011-02-08 06:05:36.530689') RETURNING "id"[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.1stwebdesigner.com/development/health-hazards-freelancing/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.1stwebdesigner.com/development/health-hazards-freelancing/', NULL, 20, NULL, '2011-02-08 06:05:36.535689', '2011-02-08 06:05:36.535689') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.1stwebdesigner.com/resources/awesome-tools-freelancers-time-management/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.1stwebdesigner.com/resources/awesome-tools-freelancers-time-management/', 'Task management tools', 6, NULL, '2011-02-08 06:05:36.538689', '2011-02-08 06:05:36.538689') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Online Payment Gateways') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'Online Payment Gateways') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('Online Payment Gateways', 'import from existing system', '2011-02-08 06:05:36.542689', '2011-02-08 06:05:36.542689') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.ebs.in/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.ebs.in/', NULL, 21, NULL, '2011-02-08 06:05:36.544689', '2011-02-08 06:05:36.544689') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Online Payment Gateways') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.ccavenue.com/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.ccavenue.com/', NULL, 21, NULL, '2011-02-08 06:05:36.547690', '2011-02-08 06:05:36.547690') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.tipsarena.org/2010/07/60-firefox-add-ons-for-web-design-and.html') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.tipsarena.org/2010/07/60-firefox-add-ons-for-web-design-and.html', NULL, 6, NULL, '2011-02-08 06:05:36.551690', '2011-02-08 06:05:36.551690') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://weblogs.asp.net/scottgu/archive/2010/07/06/introducing-webmatrix.aspx') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://weblogs.asp.net/scottgu/archive/2010/07/06/introducing-webmatrix.aspx', NULL, 8, NULL, '2011-02-08 06:05:36.554690', '2011-02-08 06:05:36.554690') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'SharePoint') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.synergyonline.com/blog/blog-moss/Lists/Posts/Post.aspx?ID=49') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.synergyonline.com/blog/blog-moss/Lists/Posts/Post.aspx?ID=49', NULL, 14, NULL, '2011-02-08 06:05:36.558690', '2011-02-08 06:05:36.558690') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Online Payment Gateways') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://simplecartjs.com/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://simplecartjs.com/', NULL, 21, NULL, '2011-02-08 06:05:36.561690', '2011-02-08 06:05:36.561690') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.howtogeek.com/howto/21831/how-to-test-drive-google-android-on-your-pc-without-buying-a-phone/') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.howtogeek.com/howto/21831/how-to-test-drive-google-android-on-your-pc-without-buying-a-phone/', NULL, 8, NULL, '2011-02-08 06:05:36.565691', '2011-02-08 06:05:36.565691') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.dabbledb.com/demo/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.dabbledb.com/demo/', NULL, 8, NULL, '2011-02-08 06:05:36.568691', '2011-02-08 06:05:36.568691') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Misc') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.evernote.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.evernote.com/', NULL, 10, NULL, '2011-02-08 06:05:36.572691', '2011-02-08 06:05:36.572691') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://acko.net/dev/farbtastic') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://acko.net/dev/farbtastic', NULL, 7, NULL, '2011-02-08 06:05:36.575691', '2011-02-08 06:05:36.575691') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://postmarkapp.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://postmarkapp.com/', NULL, 8, NULL, '2011-02-08 06:05:36.579691', '2011-02-08 06:05:36.579691') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://newsberry.com/pricing') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://newsberry.com/pricing', NULL, 8, NULL, '2011-02-08 06:05:36.582692', '2011-02-08 06:05:36.582692') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Misc') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.gooddata.com/what-is-gooddata/feature-tour/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.gooddata.com/what-is-gooddata/feature-tour/', 'Need to see if we can get inspired with some idea from here to add to our reports', 10, NULL, '2011-02-08 06:05:36.585692', '2011-02-08 06:05:36.585692') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://visualstudiogallery.msdn.microsoft.com/en-us/451e2b35-4014-454a-9df5-d3c82e20c0d6') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://visualstudiogallery.msdn.microsoft.com/en-us/451e2b35-4014-454a-9df5-d3c82e20c0d6', NULL, 8, NULL, '2011-02-08 06:05:36.588692', '2011-02-08 06:05:36.588692') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://visualstudiogallery.msdn.microsoft.com/en-us/c7b5accc-abd8-4776-a331-81392a58a3c3') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://visualstudiogallery.msdn.microsoft.com/en-us/c7b5accc-abd8-4776-a331-81392a58a3c3', NULL, 8, NULL, '2011-02-08 06:05:36.592692', '2011-02-08 06:05:36.592692') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://memcached.org/') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://memcached.org/', NULL, 8, NULL, '2011-02-08 06:05:36.595692', '2011-02-08 06:05:36.595692') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Misc') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.bidsketch.com/') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.bidsketch.com/', NULL, 10, NULL, '2011-02-08 06:05:36.598693', '2011-02-08 06:05:36.598693') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://aviathemes.com/aviaslider/?slider=droping-curtain') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://aviathemes.com/aviaslider/?slider=droping-curtain', NULL, 7, NULL, '2011-02-08 06:05:36.602693', '2011-02-08 06:05:36.602693') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Charts') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'Charts') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('Charts', 'import from existing system', '2011-02-08 06:05:36.605693', '2011-02-08 06:05:36.605693') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://raphaeljs.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://raphaeljs.com/', NULL, 22, NULL, '2011-02-08 06:05:36.607693', '2011-02-08 06:05:36.607693') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Charts') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.highcharts.com/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.highcharts.com/', NULL, 22, NULL, '2011-02-08 06:05:36.612693', '2011-02-08 06:05:36.612693') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://blueblots.com/tutorials/20-must-learn-button-tutorials-in-jquery-and-css/') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://blueblots.com/tutorials/20-must-learn-button-tutorials-in-jquery-and-css/', NULL, 6, NULL, '2011-02-08 06:05:36.615693', '2011-02-08 06:05:36.615693') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://yahoo.github.com/boomerang/doc/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://yahoo.github.com/boomerang/doc/', NULL, 8, NULL, '2011-02-08 06:05:36.619694', '2011-02-08 06:05:36.619694') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://qooxdoo.org/') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://qooxdoo.org/', NULL, 8, NULL, '2011-02-08 06:05:36.622694', '2011-02-08 06:05:36.622694') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.newrelic.com/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.newrelic.com/', NULL, 8, NULL, '2011-02-08 06:05:36.626694', '2011-02-08 06:05:36.626694') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://modxcms.com/') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://modxcms.com/', NULL, 8, NULL, '2011-02-08 06:05:36.629694', '2011-02-08 06:05:36.629694') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://net.tutsplus.com/tutorials/other/quick-tip-4-ways-to-auto-refresh-your-browser-when-designing-new-sites/') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://net.tutsplus.com/tutorials/other/quick-tip-4-ways-to-auto-refresh-your-browser-when-designing-new-sites/', NULL, 8, NULL, '2011-02-08 06:05:36.632694', '2011-02-08 06:05:36.632694') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Online Payment Gateways') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.boku.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.boku.com/', NULL, 21, NULL, '2011-02-08 06:05:36.635695', '2011-02-08 06:05:36.635695') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://css3pie.com/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://css3pie.com/', NULL, 6, NULL, '2011-02-08 06:05:36.638695', '2011-02-08 06:05:36.638695') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Open source RoR apps') [0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'Open source RoR apps') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('Open source RoR apps', 'import from existing system', '2011-02-08 06:05:36.642695', '2011-02-08 06:05:36.642695') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://openmind.sourceforge.net/default.html') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://openmind.sourceforge.net/default.html', NULL, 23, NULL, '2011-02-08 06:05:36.644695', '2011-02-08 06:05:36.644695') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Open source RoR apps') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://radiantcms.org/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://radiantcms.org/', NULL, 23, NULL, '2011-02-08 06:05:36.648695', '2011-02-08 06:05:36.648695') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Open source RoR apps') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.fatfreecrm.com/') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.fatfreecrm.com/', NULL, 23, NULL, '2011-02-08 06:05:36.651696', '2011-02-08 06:05:36.651696') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Open source RoR apps') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.instiki.org/show/HomePage') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.instiki.org/show/HomePage', NULL, 23, NULL, '2011-02-08 06:05:36.654696', '2011-02-08 06:05:36.654696') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Misc') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://isendr.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://isendr.com/', NULL, 10, NULL, '2011-02-08 06:05:36.658696', '2011-02-08 06:05:36.658696') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Open source RoR apps') [0m
+  [4;35;1mSQL (1.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://peepcode.com/products/activemerchant-pdf') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://peepcode.com/products/activemerchant-pdf', NULL, 23, NULL, '2011-02-08 06:05:36.661696', '2011-02-08 06:05:36.661696') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Online Payment Gateways') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.braintreepaymentsolutions.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.braintreepaymentsolutions.com/', NULL, 21, NULL, '2011-02-08 06:05:36.664696', '2011-02-08 06:05:36.664696') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Open source RoR apps') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.shopify.com/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.shopify.com/', NULL, 23, NULL, '2011-02-08 06:05:36.667696', '2011-02-08 06:05:36.667696') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'RoR Applications') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://hoptoadapp.com/pages/home') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://hoptoadapp.com/pages/home', NULL, 11, NULL, '2011-02-08 06:05:36.671697', '2011-02-08 06:05:36.671697') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'HelpDesk') [0m
+  [4;35;1mSQL (1.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'HelpDesk') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('HelpDesk', 'import from existing system', '2011-02-08 06:05:36.674697', '2011-02-08 06:05:36.674697') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.opensourcerails.com/projects/339403-TicketMule') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.opensourcerails.com/projects/339403-TicketMule', NULL, 24, NULL, '2011-02-08 06:05:36.677697', '2011-02-08 06:05:36.677697') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Open source RoR apps') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://lovdbyless.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://lovdbyless.com/', NULL, 23, NULL, '2011-02-08 06:05:36.680697', '2011-02-08 06:05:36.680697') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.w3.org/TR/FileAPI/') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.w3.org/TR/FileAPI/', NULL, 8, NULL, '2011-02-08 06:05:36.683697', '2011-02-08 06:05:36.683697') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Misc') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.nealgrosskopf.com/tech/thread.php?pid=71') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.nealgrosskopf.com/tech/thread.php?pid=71', NULL, 10, NULL, '2011-02-08 06:05:36.686698', '2011-02-08 06:05:36.686698') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://neteye.github.com/activity-indicator.html') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://neteye.github.com/activity-indicator.html', NULL, 7, NULL, '2011-02-08 06:05:36.689698', '2011-02-08 06:05:36.689698') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.hpage.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.hpage.com/', NULL, 6, NULL, '2011-02-08 06:05:36.716699', '2011-02-08 06:05:36.716699') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://webdesignfan.com/css-tips-i-wish-i-knew-when-i-first-started') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://webdesignfan.com/css-tips-i-wish-i-knew-when-i-first-started', NULL, 6, NULL, '2011-02-08 06:05:36.720699', '2011-02-08 06:05:36.720699') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Development') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://code.google.com/p/xdrequest/') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://code.google.com/p/xdrequest/', NULL, 8, NULL, '2011-02-08 06:05:36.724700', '2011-02-08 06:05:36.724700') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'RoR Applications') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://boxroom.rubyforge.org/index.html') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://boxroom.rubyforge.org/index.html', NULL, 11, NULL, '2011-02-08 06:05:36.727700', '2011-02-08 06:05:36.727700') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Misc') [0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://my.brainshark.com/Home.aspx') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://my.brainshark.com/Home.aspx', NULL, 10, NULL, '2011-02-08 06:05:36.731700', '2011-02-08 06:05:36.731700') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Misc') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.zumocast.com/') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.zumocast.com/', NULL, 10, NULL, '2011-02-08 06:05:36.734700', '2011-02-08 06:05:36.734700') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'RoR Applications') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.clockingit.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.clockingit.com/', NULL, 11, NULL, '2011-02-08 06:05:36.737700', '2011-02-08 06:05:36.737700') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.456bereastreet.com/archive/200505/transparent_custom_corners_and_borders/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.456bereastreet.com/archive/200505/transparent_custom_corners_and_borders/', NULL, 6, NULL, '2011-02-08 06:05:36.741701', '2011-02-08 06:05:36.741701') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.dyn-web.com/tutorials/iframes/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.dyn-web.com/tutorials/iframes/', NULL, 6, NULL, '2011-02-08 06:05:36.744701', '2011-02-08 06:05:36.744701') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://benalman.com/projects/jquery-postmessage-plugin/') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://benalman.com/projects/jquery-postmessage-plugin/', NULL, 7, NULL, '2011-02-08 06:05:36.747701', '2011-02-08 06:05:36.747701') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'RoR Applications') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.getontracks.org/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.getontracks.org/', 'Simple and effective Tracking Application', 11, NULL, '2011-02-08 06:05:36.751701', '2011-02-08 06:05:36.751701') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Charts') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://thejit.org/demos/') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://thejit.org/demos/', 'Good for complex visualizations', 22, NULL, '2011-02-08 06:05:36.754701', '2011-02-08 06:05:36.754701') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Charts') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://vis.stanford.edu/protovis/') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://vis.stanford.edu/protovis/', NULL, 22, NULL, '2011-02-08 06:05:36.757702', '2011-02-08 06:05:36.757702') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Misc') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.followupthen.com/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.followupthen.com/', NULL, 10, NULL, '2011-02-08 06:05:36.760702', '2011-02-08 06:05:36.760702') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'RoR Applications') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.aidanf.net/rails_user_authentication_tutorial') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.aidanf.net/rails_user_authentication_tutorial', NULL, 11, NULL, '2011-02-08 06:05:36.764702', '2011-02-08 06:05:36.764702') RETURNING "id"[0m
+  [4;35;1mSQL (14.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Misc') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://bridgeurl.com/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://bridgeurl.com/', NULL, 10, NULL, '2011-02-08 06:05:36.780703', '2011-02-08 06:05:36.780703') RETURNING "id"[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://border-radius.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://border-radius.com/', NULL, 6, NULL, '2011-02-08 06:05:36.784703', '2011-02-08 06:05:36.784703') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'JQuery') [0m
+  [4;35;1mSQL (1.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://www.phono.com/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://www.phono.com/', NULL, 7, NULL, '2011-02-08 06:05:36.787703', '2011-02-08 06:05:36.787703') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://sixrevisions.com/user-interface/website-wireframing/') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://sixrevisions.com/user-interface/website-wireframing/', NULL, 6, NULL, '2011-02-08 06:05:36.790703', '2011-02-08 06:05:36.790703') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (0.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://css3please.com/') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://css3please.com/', NULL, 6, NULL, '2011-02-08 06:05:36.794704', '2011-02-08 06:05:36.794704') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Other Ajax and Javascript') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mTag Load (0.0ms)[0m   [0mSELECT "tags".id FROM "tags" WHERE ("tags"."name" = 'Other Ajax and Javascript') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "tags" ("name", "description", "created_at", "updated_at") VALUES('Other Ajax and Javascript', 'import from existing system', '2011-02-08 06:05:36.797704', '2011-02-08 06:05:36.797704') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://knockoutjs.com/') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://knockoutjs.com/', NULL, 25, NULL, '2011-02-08 06:05:36.800704', '2011-02-08 06:05:36.800704') RETURNING "id"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mTag Load (1.0ms)[0m   [0;1mSELECT * FROM "tags" WHERE (name = 'Design') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://net.tutsplus.com/tutorials/html-css-techniques/the-30-css-selectors-you-must-memorize/') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://net.tutsplus.com/tutorials/html-css-techniques/the-30-css-selectors-you-must-memorize/', NULL, 6, NULL, '2011-02-08 06:05:36.803704', '2011-02-08 06:05:36.803704') RETURNING "id"[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mTag Load (1.0ms)[0m   [0mSELECT * FROM "tags" WHERE (name = 'Other Ajax and Javascript') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT "links".id FROM "links" WHERE ("links"."link" = 'http://processingjs.org/') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "links" ("link", "description", "tag", "createdby", "created_at", "updated_at") VALUES('http://processingjs.org/', NULL, 25, NULL, '2011-02-08 06:05:36.806704', '2011-02-08 06:05:36.806704') RETURNING "id"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateLinks (20101206050151)
+Migrating to CreateTags (20101206050317)
+Migrating to CreateUsers (20110205124900)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPGError: ERROR: relation "users" already exists
+: CREATE TABLE "users" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "isnotificationsubscribed" boolean, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mROLLBACK[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (32.0ms)[0m   [0mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [4;36;1mSQL (126.0ms)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateLinks (20101206050151)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (103.0ms)[0m   [0mCREATE TABLE "links" ("id" serial primary key, "link" character varying(255), "description" text, "tag" integer, "createdby" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20101206050151')[0m
+  [4;35;1mSQL (26.0ms)[0m   [0mCOMMIT[0m
+Migrating to CreateTags (20101206050317)
+  [4;36;1mSQL (1.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (231.0ms)[0m   [0mCREATE TABLE "tags" ("id" serial primary key, "name" character varying(255), "description" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20101206050317')[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mCOMMIT[0m
+Migrating to CreateUsers (20110205124900)
+  [4;36;1mSQL (1.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (179.0ms)[0m   [0mCREATE TABLE "users" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "isnotificationsubscribed" boolean, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20110205124900')[0m
+  [4;35;1mSQL (52.0ms)[0m   [0mCOMMIT[0m
+Migrating to CreateUserSessions (20110205131203)
+  [4;36;1mSQL (1.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (276.0ms)[0m   [0mCREATE TABLE "user_sessions" ("id" serial primary key, "username" character varying(255), "password" character varying(255), "remember_me" boolean, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mALTER TABLE "users" RENAME COLUMN "name" TO "username"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mALTER TABLE "users" ADD COLUMN "crypted_password" character varying(255)[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mALTER TABLE "users" ADD COLUMN "password_salt" character varying(255)[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mALTER TABLE "users" ADD COLUMN "persistence_token" character varying(255)[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20110205131203')[0m
+  [4;35;1mSQL (33.0ms)[0m   [0mCOMMIT[0m
+Migrating to Notificationlink (20110207084645)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (108.0ms)[0m   [0mCREATE TABLE "notificationlinks" ("id" serial primary key, "link" character varying(255)) [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20110207084645')[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET search_path TO public[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET standard_conforming_strings = on[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (285.0ms)[0m   [0;1mDROP DATABASE IF EXISTS "UrlLinkSharing_test"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET search_path TO public[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (14990.9ms)[0m   [0mCREATE DATABASE "UrlLinkSharing_test" ENCODING = 'utf8'[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (236.0ms)[0m   [0mCREATE TABLE "links" ("id" serial primary key, "link" character varying(255), "description" text, "tag" integer, "createdby" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (79.0ms)[0m   [0;1mCREATE TABLE "notificationlinks" ("id" serial primary key, "link" character varying(255)) [0m
+  [4;35;1mSQL (360.0ms)[0m   [0mCREATE TABLE "tags" ("id" serial primary key, "name" character varying(255), "description" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (165.0ms)[0m   [0;1mCREATE TABLE "user_sessions" ("id" serial primary key, "username" character varying(255), "password" character varying(255), "remember_me" boolean, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;35;1mSQL (104.0ms)[0m   [0mCREATE TABLE "users" ("id" serial primary key, "username" character varying(255), "email" character varying(255), "isnotificationsubscribed" boolean, "created_at" timestamp, "updated_at" timestamp, "crypted_password" character varying(255), "password_salt" character varying(255), "persistence_token" character varying(255)) [0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [4;35;1mSQL (73.0ms)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSELECT version FROM "schema_migrations"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20110207084645')[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20101206050151')[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20101206050317')[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20110205124900')[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20110205131203')[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET search_path TO public[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET standard_conforming_strings = on[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (176.0ms)[0m   [0;1mDROP DATABASE IF EXISTS "UrlLinkSharing_test"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET search_path TO public[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (12903.7ms)[0m   [0mCREATE DATABASE "UrlLinkSharing_test" ENCODING = 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (499.0ms)[0m   [0mCREATE TABLE "links" ("id" serial primary key, "link" character varying(255), "description" text, "tag" integer, "createdby" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (144.0ms)[0m   [0;1mCREATE TABLE "notificationlinks" ("id" serial primary key, "link" character varying(255)) [0m
+  [4;35;1mSQL (131.0ms)[0m   [0mCREATE TABLE "tags" ("id" serial primary key, "name" character varying(255), "description" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (137.0ms)[0m   [0;1mCREATE TABLE "user_sessions" ("id" serial primary key, "username" character varying(255), "password" character varying(255), "remember_me" boolean, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;35;1mSQL (215.0ms)[0m   [0mCREATE TABLE "users" ("id" serial primary key, "username" character varying(255), "email" character varying(255), "isnotificationsubscribed" boolean, "created_at" timestamp, "updated_at" timestamp, "crypted_password" character varying(255), "password_salt" character varying(255), "persistence_token" character varying(255)) [0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [4;35;1mSQL (98.0ms)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSELECT version FROM "schema_migrations"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20110207084645')[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20101206050151')[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20101206050317')[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20110205124900')[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20110205131203')[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET search_path TO public[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET standard_conforming_strings = on[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (174.0ms)[0m   [0;1mDROP DATABASE IF EXISTS "UrlLinkSharing_test"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET search_path TO public[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (12750.7ms)[0m   [0mCREATE DATABASE "UrlLinkSharing_test" ENCODING = 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (482.0ms)[0m   [0mCREATE TABLE "links" ("id" serial primary key, "link" character varying(255), "description" text, "tag" integer, "createdby" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (209.0ms)[0m   [0;1mCREATE TABLE "notificationlinks" ("id" serial primary key, "link" character varying(255)) [0m
+  [4;35;1mSQL (397.0ms)[0m   [0mCREATE TABLE "tags" ("id" serial primary key, "name" character varying(255), "description" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (295.0ms)[0m   [0;1mCREATE TABLE "user_sessions" ("id" serial primary key, "username" character varying(255), "password" character varying(255), "remember_me" boolean, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;35;1mSQL (243.0ms)[0m   [0mCREATE TABLE "users" ("id" serial primary key, "username" character varying(255), "email" character varying(255), "isnotificationsubscribed" boolean, "created_at" timestamp, "updated_at" timestamp, "crypted_password" character varying(255), "password_salt" character varying(255), "persistence_token" character varying(255)) [0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [4;35;1mSQL (43.0ms)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSELECT version FROM "schema_migrations"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20110207084645')[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20101206050151')[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20101206050317')[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20110205124900')[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20110205131203')[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (57.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (51.0ms)[0m   [0;1mSET search_path TO public[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET standard_conforming_strings = on[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (1627.1ms)[0m   [0;1mDROP DATABASE IF EXISTS "UrlLinkSharing_test"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET search_path TO public[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (28955.7ms)[0m   [0mCREATE DATABASE "UrlLinkSharing_test" ENCODING = 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (202.0ms)[0m   [0mCREATE TABLE "links" ("id" serial primary key, "link" character varying(255), "description" text, "tag" integer, "createdby" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (290.0ms)[0m   [0;1mCREATE TABLE "notificationlinks" ("id" serial primary key, "link" character varying(255)) [0m
+  [4;35;1mSQL (100.0ms)[0m   [0mCREATE TABLE "tags" ("id" serial primary key, "name" character varying(255), "description" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (181.0ms)[0m   [0;1mCREATE TABLE "user_sessions" ("id" serial primary key, "username" character varying(255), "password" character varying(255), "remember_me" boolean, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;35;1mSQL (142.0ms)[0m   [0mCREATE TABLE "users" ("id" serial primary key, "username" character varying(255), "email" character varying(255), "isnotificationsubscribed" boolean, "created_at" timestamp, "updated_at" timestamp, "crypted_password" character varying(255), "password_salt" character varying(255), "persistence_token" character varying(255)) [0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [4;35;1mSQL (25.0ms)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT version FROM "schema_migrations"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20110207084645')[0m
+  [4;36;1mSQL (3.0ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20101206050151')[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20101206050317')[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20110205124900')[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20110205131203')[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET search_path TO public[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET standard_conforming_strings = on[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (206.0ms)[0m   [0;1mDROP DATABASE IF EXISTS "UrlLinkSharing_test"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET search_path TO public[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (15499.9ms)[0m   [0mCREATE DATABASE "UrlLinkSharing_test" ENCODING = 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (320.0ms)[0m   [0mCREATE TABLE "links" ("id" serial primary key, "link" character varying(255), "description" text, "tag" integer, "createdby" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (120.0ms)[0m   [0;1mCREATE TABLE "notificationlinks" ("id" serial primary key, "link" character varying(255)) [0m
+  [4;35;1mSQL (93.0ms)[0m   [0mCREATE TABLE "tags" ("id" serial primary key, "name" character varying(255), "description" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (56.0ms)[0m   [0;1mCREATE TABLE "user_sessions" ("id" serial primary key, "username" character varying(255), "password" character varying(255), "remember_me" boolean, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;35;1mSQL (47.0ms)[0m   [0mCREATE TABLE "users" ("id" serial primary key, "username" character varying(255), "email" character varying(255), "isnotificationsubscribed" boolean, "created_at" timestamp, "updated_at" timestamp, "crypted_password" character varying(255), "password_salt" character varying(255), "persistence_token" character varying(255)) [0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [4;35;1mSQL (66.0ms)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSELECT version FROM "schema_migrations"[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20110207084645')[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20101206050151')[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20101206050317')[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20110205124900')[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20110205131203')[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET search_path TO public[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET standard_conforming_strings = on[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (311.0ms)[0m   [0;1mDROP DATABASE IF EXISTS "UrlLinkSharing_test"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET search_path TO public[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (15581.9ms)[0m   [0mCREATE DATABASE "UrlLinkSharing_test" ENCODING = 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (499.0ms)[0m   [0mCREATE TABLE "links" ("id" serial primary key, "link" character varying(255), "description" text, "tag" integer, "createdby" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (80.0ms)[0m   [0;1mCREATE TABLE "notificationlinks" ("id" serial primary key, "link" character varying(255)) [0m
+  [4;35;1mSQL (81.0ms)[0m   [0mCREATE TABLE "tags" ("id" serial primary key, "name" character varying(255), "description" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (112.0ms)[0m   [0;1mCREATE TABLE "user_sessions" ("id" serial primary key, "username" character varying(255), "password" character varying(255), "remember_me" boolean, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;35;1mSQL (64.0ms)[0m   [0mCREATE TABLE "users" ("id" serial primary key, "username" character varying(255), "email" character varying(255), "isnotificationsubscribed" boolean, "created_at" timestamp, "updated_at" timestamp, "crypted_password" character varying(255), "password_salt" character varying(255), "persistence_token" character varying(255)) [0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [4;35;1mSQL (84.0ms)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSELECT version FROM "schema_migrations"[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20110207084645')[0m
+  [4;36;1mSQL (3.0ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20101206050151')[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20101206050317')[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20110205124900')[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20110205131203')[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m

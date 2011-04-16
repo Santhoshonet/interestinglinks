@@ -1,0 +1,10 @@
+rails --version 2.3.8
+mail --version 2.2.7
+treetop --version 1.4.8
+authlogic --version 2.1.6
+httparty --version 0.7.4
+sanitize --version 2.0.1
+yajl-ruby --version 0.8.2
+faraday  --version 0.6.1
+indextank --version 1.0.9.1
+activesupport --version 3.0.3

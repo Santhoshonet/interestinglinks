@@ -1,0 +1,29 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# for testing the null value [link]
+one:
+  link: ""
+  description: ""
+  tag: 0
+  createdby: ""
+
+two:
+ # for testing the null tag value
+  link: "http://gmail.com"
+  description: ""
+  tag: ""
+  createdby: ""
+
+three:
+# for testing the null description
+  link: "http://google.com"
+  description: ""
+  tag:  0
+  createdby: ""
+
+four:
+ # for testing the repeated link value
+  link: "http://google.com"
+  description: ""
+  tag: 0
+  createdby: ""

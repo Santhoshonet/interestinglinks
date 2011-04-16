@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Interesting Links</title>
+  <%= render :partial => "layouts/headertag" %>
+</head>
+<body>
+<div class="header-container">
+  <div class="Logo"> <%= image_tag 'Logo-small.png' %></div>
+  <div class="LoginDetails">
+    <% unless flash[:notice].nil? %>
+        <label class="Flash_or_Notice"><%= flash[:notice] %></label>
+    <% end %>
+    <% if current_user.nil? %>
+        <%= link_to "LogIn", login_url %>
+    <% else %>
+        <%= current_user.username %> &nbsp; | &nbsp;
+        <%= link_to "LogOut",logout_url %>
+    <% end %>
+  </div>
+</div>
+<div class="clearfix"></div>
+<div class="bookmarklet_container">
+    To add bookmarklet, drag and drop this link - <a class="small blue gradient-button" href="javascript:win=window.open('http://interestinglinks.heroku.com/Links/index?id='+document.URL);win.focus();" >Add interesting link</a> to bookmark toolbar.
+</div>
+<div class="container">
+  <%= yield %>
+</div>
+</body>
+</html>
